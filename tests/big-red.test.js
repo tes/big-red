@@ -43,7 +43,7 @@ describe('Big Red', function() {
         });
 
         br.loaded(function() {
-          expect(br.get('muppets').data).to.be(data);
+          expect(br.get('muppets').data).to.eql(data);
           done();
         });
 
@@ -78,9 +78,9 @@ describe('Big Red', function() {
         });
 
         br.loaded(function() {
-          expect(br.get('muppets').data).to.be(data1);
+          expect(br.get('muppets').data).to.eql(data1);
           setTimeout(function() {
-            expect(br.get('muppets').data).to.be(data2);
+            expect(br.get('muppets').data).to.eql(data2);
             done();
           }, 250)
         });
@@ -109,7 +109,7 @@ describe('Big Red', function() {
         });
 
         br.loaded(function() {
-          expect(a.get('sesame-street').data).to.be(data);
+          expect(a.get('sesame-street').data).to.eql(data);
           done();
         });
 
@@ -135,7 +135,7 @@ describe('Big Red', function() {
 
         br.loaded(function() {
 
-          expect(br.get('muppets').data).to.be(data);
+          expect(br.get('muppets').data).to.eql(data);
 
           setTimeout(function() {
 
@@ -151,8 +151,8 @@ describe('Big Red', function() {
             });
 
             br.loaded(function() {
-              expect(br.get('muppets').data).to.be(data);
-              expect(br.get('more-muppets').data).to.be(data);
+              expect(br.get('muppets').data).to.eql(data);
+              expect(br.get('more-muppets').data).to.eql(data);
               done();
             });
 

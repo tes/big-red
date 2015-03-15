@@ -69,12 +69,12 @@ describe('Big Red', function() {
             alternate++;
             setTimeout(function() {
               next(null, alternate > 1 ? data2 : data1 );
-            }, 100);
+            }, 50);
           },
           trigger:function(next) {
             next(null, true);
           },
-          interval: 200
+          interval: 100
         });
 
         br.loaded(function() {

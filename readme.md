@@ -63,14 +63,6 @@ retriever|This is the function that will retrieve the data from the remote data 
 trigger|This is the function that will be executed to determine if the cache should be refreshed, it needs to respond with next(err, true|false) where the second parameter is true if the data should be refreshed.
 fn|A list of helper functions that will be bound to the data and exposed on the resultant cache object under the fn map.
 
-### Interacting with Cached Data and Functions
-
-```
-var br = require('br');
-var muppets = br.get('muppets').data;
-var firstMuppet = muppets.fn.first();
-```
-
 ### Data in first tick
 
 As the data is loaded asynchronously, you need to ensure that you do not attempt to do anything with the data until you are sure if it is loaded, and if you are unsure (e.g. your code isn't in the context of a request), then wrap it with:
@@ -82,6 +74,18 @@ br.loaded(function() {
 ```
 
 This is effectively 'dom ready' for reference data.
+
+If you get the data in the context of a request, and hook the startup of your application to the 'loaded' function of Big Red, then you can just interact with BR and the reference data without relying on 'loaded' throughout your code.
+
+### Interacting with Cached Data and Functions
+
+```
+var br = require('br');
+br.loaded(function() {
+  var muppets = br.get('muppets').data;
+  var firstMuppet = muppets.fn.first();
+});
+```
 
 ## Definition Folder
 

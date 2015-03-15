@@ -49,6 +49,31 @@ describe('Big Red', function() {
 
     });
 
+     it("Can attach a reference configuration and immediately retrieve data that is a map and not an array", function(done) {
+
+        var data = {
+          '1': {id:'1', name:'Kermit', type:'frog'},
+          '2': {id:'2', name:'Miss Piggy', type: 'pig'},
+          '3': {id:'3', name:'Fozzie Bear', type: 'bear'}
+        };
+
+        br.attach({
+          name:'muppets',
+          retriever: function(next) {
+            next(null, data);
+          },
+          poller:function(next) {
+            next();
+          }
+        });
+
+        br.loaded(function() {
+          expect(br.get('muppets').map).to.eql(data);
+          done();
+        });
+
+    });
+
     it("Refreshes data if the poller returns true", function(done) {
 
         var data1 = [

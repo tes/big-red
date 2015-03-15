@@ -82,6 +82,8 @@ This is effectively 'dom ready' for your reference data.
 
 If you get the data in the context of a request, and hook the startup of your application to the 'loaded' function of Big Red, then you can just interact with BR and the reference data without relying on 'loaded' throughout your code.
 
+Of course the idiomatic way to do this is to actually do this once during application startup, and then pass the reference to the br instance that you know is loaded into all of your modules and functions that need master data.  For legacy reasons at TES we will use both methods for a period.
+
 ### Interacting with Cached Data and Functions
 
 ```

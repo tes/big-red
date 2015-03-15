@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/tes/big-red.svg?branch=master)](https://travis-ci.org/tes/big-red)
 
+![Big Red Dog](http://www.hollywoodreporter.com/sites/default/files/imagecache/modal_800/2012/05/clifford_happy_a_l.jpg)
+
 This module provides a sane interface between definitions of master data that may reside in a database or other store, and an in memory cache of this data that needs to be periodically updated (e.g. if the underlying data changes).
 
 The idea is that these data sets are typically small and slow moving, but you don't want to put the data in code as it will force a re-deploy of all services using them.  You also don't really want to hit the database on every single request given it probably only changes once a week or once a month, and you are probably getting millions of requests per day.
@@ -11,7 +13,7 @@ The idea is that these data sets are typically small and slow moving, but you do
 You can explicitly attach a reference data handler (the example shows data in memory - clearly in the real world you would go off to a data store or a web service to get this data):
 
 
-```
+```js
 var br = require('big-red');
 
 var data = [
@@ -41,7 +43,7 @@ br.loaded(function() {
 
 A reference data handler must consist of the following:
 
-```
+```js
 {
   name:'muppets',
   retriever: function(next) {
@@ -72,7 +74,7 @@ interval|Optional - ms interval between running the poller to check for changes,
 
 As the data is loaded asynchronously, you need to ensure that you do not attempt to do anything with the data until you are sure if it is loaded, and if you are unsure (e.g. your code isn't in the context of a request), then wrap it with:
 
-```
+```js
 br.loaded(function() {
   // Your code
 });
@@ -86,7 +88,7 @@ Of course the idiomatic way to do this is to actually do this once during applic
 
 ### Interacting with Cached Data and Functions
 
-```
+```js
 var br = require('br');
 br.loaded(function() {
   var muppets = br.get('muppets').data;
@@ -100,7 +102,7 @@ You can also store each of the definitions as a module in a folder, and load all
 
 In folder ./definitions, create a file called: muppets.js (have as many files as you like):
 
-```
+```js
 var data = [
   {id:'1', name:'Kermit', type:'frog'},
   {id:'2', name:'Miss Piggy', type: 'pig'},
@@ -120,7 +122,7 @@ module.exports = {
 
 Then point Big Red at your definition folder:
 
-```
+```js
 var br = require('big-red');
 br.attachPath('./definitions');
 br.loaded(function() {

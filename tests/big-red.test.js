@@ -181,7 +181,7 @@ describe('Big Red', function() {
         });
 
         br.loaded(function() {
-          expect(br.get('muppets').status.err.message).to.be('Frankly, Miss Piggy, I don\'t give a hoot!');
+          expect(br.get('muppets').err.message).to.be('Frankly, Miss Piggy, I don\'t give a hoot!');
           done();
         });
 
@@ -206,7 +206,7 @@ describe('Big Red', function() {
         });
 
         br.loaded(function() {
-          expect(br.get('muppets').status.err.message).to.be('Frankly, Miss Piggy, I don\'t give a hoot!');
+          expect(br.get('muppets').err.message).to.be('Frankly, Miss Piggy, I don\'t give a hoot!');
           done();
         });
 

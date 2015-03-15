@@ -8,7 +8,7 @@ module.exports = {
   retriever: function(next) {
     next(null, data);
   },
-  trigger: function(next) {
+  poller: function(next) {
     next();
   },
   fn: {

@@ -25,7 +25,7 @@ br.attach({
   retriever: function(next) {
     next(null, data);
   },
-  trigger:function(next) {
+  poller:function(next) {
     next(null, true);
   },
   interval: 5000
@@ -47,7 +47,7 @@ A reference data handler must consist of the following:
   retriever: function(next) {
     next(null, data);
   },
-  trigger:function(next) {
+  poller:function(next) {
     next(null, true);
   },
   fn: {
@@ -64,9 +64,9 @@ A reference data handler must consist of the following:
 ------|------------
 name|This is the name you can use to later retrieve the data loaded by it.
 retriever|This is the function that will retrieve the data from the remote data source, it needs to respond with next(err, data) - where data is the data that will be cached in memory.
-trigger|This is the function that will be executed to determine if the cache should be refreshed, it needs to respond with next(err, true|false) where the second parameter is true if the data should be refreshed.
+poller|This is the function that will be executed to determine if the cache should be refreshed, it needs to respond with next(err, true|false) where the second parameter is true if the data should be refreshed.
 fn|A list of helper functions that will be bound to the data and exposed on the resultant cache object under the fn map.
-interval|Optional - ms interval between running the trigger to check for changes, defaults to 1 minute.
+interval|Optional - ms interval between running the poller to check for changes, defaults to 1 minute.
 
 ### Data in first tick
 
@@ -110,7 +110,7 @@ module.exports = {
   retriever: function(next) {
     next(null, data);
   },
-  trigger:function(next) {
+  poller:function(next) {
     next();
   }
 }

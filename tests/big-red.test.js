@@ -37,7 +37,7 @@ describe('Big Red', function() {
           retriever: function(next) {
             next(null, data);
           },
-          trigger:function(next) {
+          poller:function(next) {
             next();
           }
         });
@@ -49,7 +49,7 @@ describe('Big Red', function() {
 
     });
 
-    it("Refreshes data if the trigger returns true", function(done) {
+    it("Refreshes data if the poller returns true", function(done) {
 
         var data1 = [
           {id:'1', name:'Kermit', type:'frog'}
@@ -71,7 +71,7 @@ describe('Big Red', function() {
               next(null, alternate > 1 ? data2 : data1 );
             }, 50);
           },
-          trigger:function(next) {
+          poller:function(next) {
             next(null, true);
           },
           interval: 100
@@ -103,7 +103,7 @@ describe('Big Red', function() {
           retriever: function(next) {
             next(null, data);
           },
-          trigger:function(next) {
+          poller:function(next) {
             next();
           }
         });
@@ -128,7 +128,7 @@ describe('Big Red', function() {
           retriever: function(next) {
             next(null, data);
           },
-          trigger:function(next) {
+          poller:function(next) {
             next();
           }
         });
@@ -144,7 +144,7 @@ describe('Big Red', function() {
               retriever: function(next) {
                 next(null, data);
               },
-              trigger:function(next) {
+              poller:function(next) {
                 next();
               },
               interval: 1000
@@ -162,7 +162,7 @@ describe('Big Red', function() {
 
     });
 
-    it("Will fail silently but set status error if the trigger has an error", function(done) {
+    it("Will fail silently but set status error if the poller has an error", function(done) {
 
         var data = [
           {id:'1', name:'Kermit', type:'frog'},
@@ -175,7 +175,7 @@ describe('Big Red', function() {
           retriever: function(next) {
             next(null, data);
           },
-          trigger:function(next) {
+          poller:function(next) {
             next(new Error('Frankly, Miss Piggy, I don\'t give a hoot!'));
           }
         });
@@ -200,7 +200,7 @@ describe('Big Red', function() {
           retriever: function(next) {
             next(new Error('Frankly, Miss Piggy, I don\'t give a hoot!'), data);
           },
-          trigger:function(next) {
+          poller:function(next) {
             next(null, true);
           }
         });

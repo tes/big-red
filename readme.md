@@ -1,5 +1,7 @@
 # Big Red
 
+[![Build Status](https://travis-ci.org/tes/big-red.svg?branch=master)](https://travis-ci.org/tes/big-red)
+
 This module provides a sane interface between definitions of master data that may reside in a database or other store, and an in memory cache of this data that needs to be periodically updated (e.g. if the underlying data changes).
 
 The idea is that these data sets are typically small and slow moving, but you don't want to put the data in code as it will force a re-deploy of all services using them.  You also don't really want to hit the database on every single request given it probably only changes once a week or once a month, and you are probably getting millions of requests per day.

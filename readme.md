@@ -26,7 +26,7 @@ br.attach({
     next(null, data);
   },
   trigger:function(next) {
-    next();
+    next(null, true);
   },
   interval: 5000
 });
@@ -48,7 +48,7 @@ A reference data handler must consist of the following:
     next(null, data);
   },
   trigger:function(next) {
-    next();
+    next(null, true);
   },
   fn: {
     first: function() {

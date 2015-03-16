@@ -107,7 +107,11 @@ Will return:
 }
 ```
 
-If the callback returns a map (and not an array), then the data property will remain as an empty array, with the data you returned accessible via the map property.
+If the retriever callback returns a map (and not an array), then the data property will remain as an empty array, with the data you returned accessible via the map property.
+
+### Helper Function Binding
+
+Any helper functions defined within the fn section of the configuration will be bound to the data returned by the retriever, so 'this' === your returned data set.
 
 ### Data in first tick
 

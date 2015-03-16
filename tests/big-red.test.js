@@ -44,6 +44,9 @@ describe('Big Red', function() {
 
         br.loaded(function() {
           expect(br.get('muppets').data).to.eql(data);
+          expect(br.get('muppets').map['1']).to.eql(data[0]);
+          expect(br.get('muppets').map['2']).to.eql(data[1]);
+          expect(br.get('muppets').map['3']).to.eql(data[2]);
           done();
         });
 

@@ -69,6 +69,45 @@ retriever|This is the function that will retrieve the data from the remote data 
 poller|This is the function that will be executed to determine if the cache should be refreshed, it needs to respond with next(err, true|false) where the second parameter is true if the data should be refreshed.
 fn|A list of helper functions that will be bound to the data and exposed on the resultant cache object under the fn map.
 interval|Optional - ms interval between running the poller to check for changes, defaults to 1 minute.
+id|Optional - property to use as the index for the array > map conversion, set to null to disable.
+
+### Data Types
+
+Data returned by the retriever can be either be an array or an object (referred to as a map given it is typically just a set of key / values one level deep).
+
+If you return an array, and elements within that array have an 'id' field, it will automatically transform the values into a map for you (you can update the field used for this by passing the id parameter into the attach function).
+
+```js
+br.get('muppets').data
+```
+
+will return:
+
+```js
+[
+  {id:'1', name:'Kermit', type:'frog'},
+  {id:'2', name:'Miss Piggy', type: 'pig'},
+  {id:'3', name:'Fozzie Bear', type: 'bear'}
+]
+```
+
+Using this same data structure, but accessing the data via the transformed map:
+
+```
+br.get('muppets').map
+```
+
+Will return:
+
+```js
+{
+  '1': { id: '1', name: 'Kermit', type: 'frog' },
+  '2': { id: '2', name: 'Miss Piggy', type: 'pig' },
+  '3': { id: '3', name: 'Fozzie Bear', type: 'bear' }
+}
+```
+
+If the callback returns a map (and not an array), then the data property will remain as an empty array, with the data you returned accessible via the map property.
 
 ### Data in first tick
 

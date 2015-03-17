@@ -13,7 +13,7 @@ module.exports = {
   },
   fn: {
     first: function() {
-      var self = this;
+      var self = this.data;
       return self[0];
     }
   }

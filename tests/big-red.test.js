@@ -43,7 +43,7 @@ describe('Big Red', function() {
         });
 
         br.loaded(function() {
-          expect(br.get('muppets').data).to.eql(data);
+          expect(br.get('muppets').array).to.eql(data);
           expect(br.get('muppets').map['1']).to.eql(data[0]);
           expect(br.get('muppets').map['2']).to.eql(data[1]);
           expect(br.get('muppets').map['3']).to.eql(data[2]);
@@ -106,9 +106,9 @@ describe('Big Red', function() {
         });
 
         br.loaded(function() {
-          expect(br.get('muppets').data).to.eql(data1);
+          expect(br.get('muppets').array).to.eql(data1);
           setTimeout(function() {
-            expect(br.get('muppets').data).to.eql(data2);
+            expect(br.get('muppets').array).to.eql(data2);
             done();
           }, 250)
         });
@@ -137,7 +137,7 @@ describe('Big Red', function() {
         });
 
         br.loaded(function() {
-          expect(a.get('sesame-street').data).to.eql(data);
+          expect(a.get('sesame-street').array).to.eql(data);
           done();
         });
 
@@ -163,7 +163,7 @@ describe('Big Red', function() {
 
         br.loaded(function() {
 
-          expect(br.get('muppets').data).to.eql(data);
+          expect(br.get('muppets').array).to.eql(data);
 
           setTimeout(function() {
 
@@ -179,8 +179,8 @@ describe('Big Red', function() {
             });
 
             br.loaded(function() {
-              expect(br.get('muppets').data).to.eql(data);
-              expect(br.get('more-muppets').data).to.eql(data);
+              expect(br.get('muppets').array).to.eql(data);
+              expect(br.get('more-muppets').array).to.eql(data);
               done();
             });
 
@@ -244,8 +244,8 @@ describe('Big Red', function() {
 
       br.attachPath(__dirname + '/fixtures/references');
       br.loaded(function() {
-        expect(br.get('muppets').data[0].name).to.be('Kermit');
-        expect(br.get('sesame-street').data[0].name).to.be('Big Bird');
+        expect(br.get('muppets').array[0].name).to.be('Kermit');
+        expect(br.get('sesame-street').array[0].name).to.be('Big Bird');
         done();
       });
 
@@ -268,11 +268,13 @@ describe('Big Red', function() {
       br.attachPath(__dirname + '/fixtures/references');
       br.loaded(function() {
         var status = br.status();
-        expect(status.length).to.be(2);
-        expect(status[0].name).to.be('muppets');
-        expect(status[0].count).to.be(3);
-        expect(status[1].name).to.be('sesame-street');
-        expect(status[1].count).to.be(2);
+        expect(status.length).to.be(3);
+        expect(status[0].name).to.be('complex');
+        expect(status[0].count).to.be(2);
+        expect(status[1].name).to.be('muppets');
+        expect(status[1].count).to.be(3);
+        expect(status[2].name).to.be('sesame-street');
+        expect(status[2].count).to.be(2);
         done();
       });
 

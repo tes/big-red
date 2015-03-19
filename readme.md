@@ -33,11 +33,13 @@ br.attach({
   interval: 5000
 });
 
-br.loaded(function() {
+br.load(['muppets'], function() {
   expect(br.get('muppets').array).to.be(data);
   done();
 });
 ```
+
+The first parameter to load is an array of names of references that it will load, leave the array empty to load all.
 
 ### Concepts
 
@@ -123,10 +125,6 @@ br.loaded(function() {
 });
 ```
 
-This is effectively 'dom ready' for your reference data.
-
-If you get the data in the context of a request, and hook the startup of your application to the 'loaded' function of Big Red, then you can just interact with BR and the reference data without relying on 'loaded' throughout your code.
-
 Of course the idiomatic way to do this is to actually do this once during application startup, and then pass the reference to the br instance that you know is loaded into all of your modules and functions that need master data.  For legacy reasons at TES we will use both methods for a period.
 
 ### Interacting with Cached Data and Functions
@@ -138,6 +136,9 @@ br.loaded(function() {
   var firstMuppet = muppets.fn.first();
 });
 ```
+
+This is effectively 'dom ready' for your reference data.
+
 
 ## Definition Folder
 
@@ -166,14 +167,24 @@ module.exports = {
 Then point Big Red at your definition folder:
 
 ```js
+
 var br = require('big-red');
 br.attachPath('./definitions');
-br.loaded(function() {
+
+br.load([], function() {
   expect(br.get('muppets').array).to.be([
     {id:'1', name:'Kermit', type:'frog'},
     {id:'2', name:'Miss Piggy', type: 'pig'},
     {id:'3', name:'Fozzie Bear', type: 'bear'}
   ]);
+});
+```
+
+Elsewhere, in other modules, you can now simply:
+
+```
+var br = require('big-red');
+br.loaded(function() {
   done();
 });
 ```

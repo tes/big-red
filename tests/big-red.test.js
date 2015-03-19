@@ -17,7 +17,7 @@ describe('Big Red', function() {
           name:'muppets'
        });
 
-       br.loaded(function() {
+       br.load(['muppets'], function() {
           expect(br.get('muppets')).to.be(undefined);
           done();
        });
@@ -42,7 +42,7 @@ describe('Big Red', function() {
           }
         });
 
-        br.loaded(function() {
+        br.load(['muppets'], function() {
           expect(br.get('muppets').array).to.eql(data);
           expect(br.get('muppets').map['1']).to.eql(data[0]);
           expect(br.get('muppets').map['2']).to.eql(data[1]);
@@ -70,7 +70,7 @@ describe('Big Red', function() {
           }
         });
 
-        br.loaded(function() {
+        br.load(['muppets'], function() {
           expect(br.get('muppets').map).to.eql(data);
           done();
         });
@@ -105,7 +105,7 @@ describe('Big Red', function() {
           interval: 100
         });
 
-        br.loaded(function() {
+        br.load(['muppets'], function() {
           expect(br.get('muppets').array).to.eql(data1);
           setTimeout(function() {
             expect(br.get('muppets').array).to.eql(data2);
@@ -136,10 +136,16 @@ describe('Big Red', function() {
           }
         });
 
-        br.loaded(function() {
-          expect(a.get('sesame-street').array).to.eql(data);
-          done();
+        br.load(['sesame-street'], function() {
+          // Do nothing
         });
+
+        setTimeout(function() {
+          br.loaded(function() {
+            expect(a.get('sesame-street').array).to.eql(data);
+            done();
+          });
+        }, 200);
 
     });
 
@@ -161,7 +167,7 @@ describe('Big Red', function() {
           }
         });
 
-        br.loaded(function() {
+        br.load(['muppets'], function() {
 
           expect(br.get('muppets').array).to.eql(data);
 
@@ -178,7 +184,7 @@ describe('Big Red', function() {
               interval: 1000
             });
 
-            br.loaded(function() {
+            br.load(['more-muppets'], function() {
               expect(br.get('muppets').array).to.eql(data);
               expect(br.get('more-muppets').array).to.eql(data);
               done();
@@ -208,7 +214,7 @@ describe('Big Red', function() {
           }
         });
 
-        br.loaded(function() {
+        br.load(['muppets'], function() {
           expect(br.get('muppets').err.message).to.be('Frankly, Miss Piggy, I don\'t give a hoot!');
           done();
         });
@@ -233,7 +239,7 @@ describe('Big Red', function() {
           }
         });
 
-        br.loaded(function() {
+        br.load(['muppets'], function() {
           expect(br.get('muppets').err.message).to.be('Frankly, Miss Piggy, I don\'t give a hoot!');
           done();
         });
@@ -243,7 +249,7 @@ describe('Big Red', function() {
     it("Can load all references from modules in a given path", function(done) {
 
       br.attachPath(__dirname + '/fixtures/references');
-      br.loaded(function() {
+      br.load(null, function() {
         expect(br.get('muppets').array[0].name).to.be('Kermit');
         expect(br.get('sesame-street').array[0].name).to.be('Big Bird');
         done();
@@ -254,7 +260,7 @@ describe('Big Red', function() {
     it("Can call helpers bound to the data managed by the reference", function(done) {
 
       br.attachPath(__dirname + '/fixtures/references');
-      br.loaded(function() {
+      br.load([], function() {
         var ss = br.get('sesame-street');
         expect(ss.fn.first().name).to.be('Big Bird');
         done();
@@ -266,7 +272,7 @@ describe('Big Red', function() {
     it("Can see the status", function(done) {
 
       br.attachPath(__dirname + '/fixtures/references');
-      br.loaded(function() {
+      br.load([], function() {
         var status = br.status();
         expect(status.length).to.be(3);
         expect(status[0].name).to.be('complex');

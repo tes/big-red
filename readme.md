@@ -34,7 +34,7 @@ br.attach({
 });
 
 br.loaded(function() {
-  expect(br.get('muppets').data).to.be(data);
+  expect(br.get('muppets').array).to.be(data);
   done();
 });
 ```
@@ -54,7 +54,7 @@ A reference data handler must consist of the following:
   },
   fn: {
     first: function() {
-      var self = this;
+      var self = this.array;
       return self[0];
     }
   },
@@ -78,7 +78,7 @@ Data returned by the retriever can be either be an array or an object (referred 
 If you return an array, and elements within that array have an 'id' field, it will automatically transform the values into a map for you (you can update the field used for this by passing the id parameter into the attach function).
 
 ```js
-br.get('muppets').data
+br.get('muppets').array
 ```
 
 will return:
@@ -134,7 +134,7 @@ Of course the idiomatic way to do this is to actually do this once during applic
 ```js
 var br = require('br');
 br.loaded(function() {
-  var muppets = br.get('muppets').data;
+  var muppets = br.get('muppets').array;
   var firstMuppet = muppets.fn.first();
 });
 ```
@@ -169,7 +169,11 @@ Then point Big Red at your definition folder:
 var br = require('big-red');
 br.attachPath('./definitions');
 br.loaded(function() {
-  expect(br.get('muppets').data).to.be(data);
+  expect(br.get('muppets').array).to.be([
+    {id:'1', name:'Kermit', type:'frog'},
+    {id:'2', name:'Miss Piggy', type: 'pig'},
+    {id:'3', name:'Fozzie Bear', type: 'bear'}
+  ]);
   done();
 });
 ```

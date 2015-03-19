@@ -262,4 +262,20 @@ describe('Big Red', function() {
 
     });
 
+
+    it("Can see the status", function(done) {
+
+      br.attachPath(__dirname + '/fixtures/references');
+      br.loaded(function() {
+        var status = br.status();
+        expect(status.length).to.be(2);
+        expect(status[0].name).to.be('muppets');
+        expect(status[0].count).to.be(3);
+        expect(status[1].name).to.be('sesame-street');
+        expect(status[1].count).to.be(2);
+        done();
+      });
+
+    });
+
 });

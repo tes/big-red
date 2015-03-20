@@ -268,6 +268,17 @@ describe('Big Red', function() {
 
     });
 
+    it("Mapify works on definitions with a different id", function(done) {
+
+      br.attachPath(__dirname + '/fixtures/references');
+      br.load([], function() {
+        var ss = br.get('sesame-street').map;
+        expect(Object.keys(ss)).to.eql(['1','2']);
+        done();
+      });
+
+    });
+
 
     it("Can see the status", function(done) {
 

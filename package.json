@@ -1,6 +1,6 @@
 {
   "name": "big-red",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "REference Data manager",
   "main": "index.js",
   "scripts": {

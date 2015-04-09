@@ -297,4 +297,33 @@ describe('Big Red', function() {
 
     });
 
+    it("Can call load multiple times without pollers being re-created", function(done) {
+
+        var data = {
+          '1': {id:'1', name:'Kermit', type:'frog'},
+          '2': {id:'2', name:'Miss Piggy', type: 'pig'},
+          '3': {id:'3', name:'Fozzie Bear', type: 'bear'}
+        };
+
+        br.attach({
+          name:'muppets',
+          retriever: function(next) {
+            next(null, data);
+          },
+          poller:function(next) {
+            next();
+          }
+        });
+
+        br.load(['muppets'], function() {
+          var t1 = br.get('muppets').ticker;
+          br.load(['muppets'], function() {
+              var t2 = br.get('muppets').ticker;
+              expect(t1).to.eql(t2);
+              done();
+          });
+        });
+
+    });
+
 });

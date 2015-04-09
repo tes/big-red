@@ -326,4 +326,41 @@ describe('Big Red', function() {
 
     });
 
+    it("Callback doesn't fire before reference is loaded when load is called multiple times", function(done) {
+
+        var data = [
+          {id:'1', name:'Kermit', type:'frog'},
+          {id:'2', name:'Miss Piggy', type: 'pig'},
+          {id:'3', name:'Fozzie Bear', type: 'bear'}
+        ];
+
+        br.attach({
+          name:'muppets',
+          retriever: function(next) {
+            setTimeout(function () {
+              next(null, data);
+            }, 0);
+          },
+          poller:function(next) {
+            next();
+          }
+        });
+
+        var count = 0;
+
+        function calledBack () {
+          if (++count == 2) done();
+        }
+
+        br.load(['muppets'], function() {
+          expect(br.get('muppets').array).to.eql(data);
+          calledBack();
+        });
+
+        br.load(['muppets'], function() {
+          expect(br.get('muppets').array).to.eql(data);
+          calledBack();
+        });
+    });
+
 });

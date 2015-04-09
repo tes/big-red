@@ -132,7 +132,9 @@ Of course the idiomatic way to do this is to actually do this once during applic
 ```js
 var br = require('br');
 br.loaded(function() {
-  var muppets = br.get('muppets').array;
+  var muppets = br.get('muppets');
+  var muppetsArray = muppets.array;
+  var muppetsMap = muppets.map;
   var firstMuppet = muppets.fn.first();
 });
 ```

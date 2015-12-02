@@ -25,6 +25,7 @@ describe('Big Red', function() {
     });
 
     it("Can attach a reference configuration and immediately retrieve data", function(done) {
+
         var data = [
           {id:'1', name:'Kermit', type:'frog'},
           {id:'2', name:'Miss Piggy', type: 'pig'},
@@ -48,32 +49,7 @@ describe('Big Red', function() {
           expect(br.get('muppets').map['3']).to.eql(data[2]);
           done();
         });
-    });
 
-    it("Can attach a reference configuration and immediately retrieve data via async get", function(done) {
-        var data = [
-          {id:'1', name:'Kermit', type:'frog'},
-          {id:'2', name:'Miss Piggy', type: 'pig'},
-          {id:'3', name:'Fozzie Bear', type: 'bear'}
-        ];
-
-        br.attach({
-          name:'muppets',
-          retriever: function(next) {
-            next(null, data);
-          },
-          poller:function(next) {
-            next();
-          }
-        });
-
-        br.load(['muppets'], function() {
-          br.get('muppets', function(err, reference) {
-            expect(reference.array).to.eql(data);
-          });
-
-          done();
-        });
     });
 
      it("Can attach a reference configuration and immediately retrieve data that is a map and not an array", function(done) {

@@ -1,6 +1,6 @@
 {
   "name": "big-red",
-  "version": "0.0.22",
+  "version": "1.0.0",
   "description": "REference Data manager",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "humanize-duration": "^2.5.0",
-    "lodash": "^3.5.0",
+    "lodash": "^4.17.10",
     "require-all": "^1.0.0"
   },
   "devDependencies": {

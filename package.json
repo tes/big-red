@@ -1,7 +1,11 @@
 {
   "name": "big-red",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "REference Data manager",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tes/big-red.git"
+  },
   "main": "index.js",
   "scripts": {
     "lint": "jshint .",
@@ -11,7 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "humanize-duration": "^2.5.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "require-all": "^1.0.0"
   },
   "devDependencies": {

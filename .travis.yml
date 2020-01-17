@@ -1,9 +1,5 @@
 language: node_js
 node_js:
-- '6'
-- '8'
-- '10'
-notifications:
-  hipchat:
-    rooms:
-      secure: Bd+fUkViG9+xJit5aAAYoAP9oLrSKzK6CFc61KtyXzavUOGIlTGMEQjiE9KjxqKsrUWBmzpn5/XC8HohPBQDtoNlHi3uguLl4RogF6bHy//OIsrUDHuAU0aM/aqwXo/6Xfx+7Mf+w743TwJuOGrmKDkGE8ErahbBthaCXRhxk8s=
+  - '10'
+  - '12'
+  - 'node'
